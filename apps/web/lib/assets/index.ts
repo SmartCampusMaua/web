@@ -1,0 +1,50 @@
+import { ASSET_LOCATIONS } from "./locations";
+import { ASSET_REGISTRY } from "./registry.generated";
+import type { Asset, AssetLocation, AssetPlace, MapAsset } from "./types";
+
+/**
+ * Enquanto um asset não tem coordenada em locations.ts, ele fica numa grade
+ * provisória ao norte do campus, para já aparecer no mapa com os dados certos.
+ */
+const STAGING = { lat: -23.645, lng: -46.5775, dLat: -0.0003, dLng: 0.0004, cols: 7 };
+
+const stagingSpot = (i: number): AssetLocation => ({
+  lat: STAGING.lat + Math.floor(i / STAGING.cols) * STAGING.dLat,
+  lng: STAGING.lng + (i % STAGING.cols) * STAGING.dLng,
+});
+
+function toMapAssets(assets: Asset[]): MapAsset[] {
+  let staged = 0;
+  return assets.map((a) => {
+    const location = ASSET_LOCATIONS[a.id];
+    return location
+      ? { ...a, location, provisional: false }
+      : { ...a, location: stagingSpot(staged++), provisional: true };
+  });
+}
+
+export const ASSETS: MapAsset[] = toMapAssets(ASSET_REGISTRY);
+
+export const getAsset = (id: string) => ASSETS.find((a) => a.id === id);
+
+const placeKey = (lat: number, lng: number) => `${lat.toFixed(6)},${lng.toFixed(6)}`;
+
+/** "Central - Cisterna" + "Central - Consumo" → "Central" */
+function placeName(assets: MapAsset[]) {
+  if (assets.length === 1) return assets[0].name;
+  const heads = new Set(assets.map((a) => a.name.split(" - ")[0]));
+  return heads.size === 1 ? [...heads][0] : `${assets.length} pontos`;
+}
+
+/** Assets com a mesma coordenada viram um único marcador. */
+export function groupByPlace(assets: MapAsset[]): AssetPlace[] {
+  const map = new Map<string, AssetPlace>();
+  for (const asset of assets) {
+    const { lat, lng } = asset.location;
+    const key = placeKey(lat, lng);
+    const place = map.get(key);
+    if (place) place.assets.push(asset);
+    else map.set(key, { key, name: asset.name, lat, lng, assets: [asset] });
+  }
+  return [...map.values()].map((p) => ({ ...p, name: placeName(p.assets) }));
+}

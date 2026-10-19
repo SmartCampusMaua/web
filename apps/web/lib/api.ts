@@ -1,4 +1,4 @@
-import type { SensorReading, SensorReadings, SensorsResponse, SensorType } from "@smartcampus/types";
+import type { SensorReadings, SensorsResponse, SensorType } from "@smartcampus/types";
 
 // This module is used both from Server Components (fetch runs inside the
 // web container/process) and Client Components (fetch runs in the browser).
@@ -8,8 +8,8 @@ import type { SensorReading, SensorReadings, SensorsResponse, SensorType } from 
 // dev (no Docker) doesn't need API_INTERNAL_URL — both sides share localhost.
 const API_URL =
   (typeof window === "undefined" && process.env.API_INTERNAL_URL) ||
-  process.env.NEXT_PUBLIC_API_URL ||
-  "http://localhost:3300";
+  process.env.IOT_API_URL ||
+  "https://iot.maua.br/";
 
 export async function fetchEnergySensors(): Promise<SensorsResponse> {
   const res = await fetch(`${API_URL}/energy/sensors`, {
