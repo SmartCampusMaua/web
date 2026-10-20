@@ -60,6 +60,10 @@ export interface SensorSeries {
 
 export interface AssetTimeseries {
   assetId: string;
+  /** como a API foi consultada: pelo asset_id (normal) ou pela lista de sensor_ids (fallback) */
+  via: "assetId" | "sensorId";
+  /** URLs consultadas na API IoT (úteis para depurar no navegador) */
+  requests: string[];
   fetchedAt: number;
   /** true quando bateu no limit: só as leituras mais recentes vieram */
   truncated: boolean;

@@ -1,4 +1,4 @@
-//"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import type { AssetTimeseries } from "@/lib/assets/types";
@@ -20,15 +20,19 @@ export function useAssetTimeseries(assetId: string | null, refreshMs = 60_000) {
     async function load(initial: boolean) {
       if (initial) setState({ data: null, loading: true, error: false });
       try {
-        // Mudança aqui: Substitua o domínio por '/api-maua'
-        const res = await fetch(`/api-iot/timeseries/v0.4/imt/iot/sensors?assetId=${assetId}&interval=300&limit=1000`, {
+        // Sempre pela rota do Next (/api/assets/...): ela normaliza a resposta crua da API IoT.
+        const res = await fetch(`/api/assets/${assetId}/timeseries`, {
           signal: controller.signal,
         });
         if (!res.ok) throw new Error(String(res.status));
         const data = (await res.json()) as AssetTimeseries;
+        // Se o formato não for o esperado (ex.: resposta crua da API), vira erro visível
+        // em vez de painéis em branco.
+        if (!Array.isArray(data?.series)) throw new Error("formato inesperado");
         if (!controller.signal.aborted) setState({ data, loading: false, error: false });
       } catch {
         if (controller.signal.aborted) return;
+        // Em um refresh que falha, mantém o que já estava na tela.
         setState((s) => ({ data: s.data, loading: false, error: s.data === null }));
       }
     }

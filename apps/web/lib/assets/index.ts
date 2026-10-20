@@ -6,7 +6,7 @@ import type { Asset, AssetLocation, AssetPlace, MapAsset } from "./types";
  * Enquanto um asset não tem coordenada em locations.ts, ele fica numa grade
  * provisória ao norte do campus, para já aparecer no mapa com os dados certos.
  */
-const STAGING = { lat: -23.645, lng: -46.5775, dLat: -0.0003, dLng: 0.0004, cols: 7 };
+const STAGING = { lat: -23.6446, lng: -46.5782, dLat: -0.0006, dLng: 0.0007, cols: 4 };
 
 const stagingSpot = (i: number): AssetLocation => ({
   lat: STAGING.lat + Math.floor(i / STAGING.cols) * STAGING.dLat,

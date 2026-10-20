@@ -58,6 +58,8 @@ interface Props {
   loading: boolean;
   error: boolean;
   truncated: boolean;
+  requests: string[];
+  via?: "assetId" | "sensorId";
   onSelectAsset: (id: string) => void;
   onClose: () => void;
 }
@@ -130,9 +132,32 @@ export function SeriesCharts(p: Props) {
         </p>
       )}
 
+      {!p.loading && !p.error && p.series && p.series.length === 0 && (
+        <div className="rounded-xl border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-600">
+          <p className="font-medium text-gray-800">A API não devolveu leituras para este local.</p>
+          <p className="mt-1 text-xs">
+            Nas últimas {QUERY.intervalMinutes / 60}h não há dados, ou o device ainda não está
+            vinculado a este asset. Confira a resposta direto na API:
+          </p>
+          <ul className="mt-2 space-y-1 text-xs">
+            {p.requests.map((u) => (
+              <li key={u}>
+                <a href={u} target="_blank" rel="noreferrer" className="break-all text-blue-600 underline">
+                  {u.includes("assetId") ? "consulta por assetId" : "consulta por sensorId"}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {p.loading
         ? [0, 1].map((i) => <div key={i} className="h-44 animate-pulse rounded-xl bg-gray-100" />)
         : lines.map((s) => <LineCard key={s.sensorId} series={s} />)}
+
+      {p.via && !p.loading && p.series && p.series.length > 0 && (
+        <p className="pt-1 text-center text-[11px] text-gray-400">via {p.via}</p>
+      )}
 
     </div>
   );

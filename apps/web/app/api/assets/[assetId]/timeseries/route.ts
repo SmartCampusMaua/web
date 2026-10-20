@@ -15,7 +15,7 @@ export async function GET(
   }
 
   try {
-    return NextResponse.json(await fetchAssetTimeseries(asset.id));
+    return NextResponse.json(await fetchAssetTimeseries(asset));
   } catch (err) {
     console.error(`[timeseries] ${asset.name}:`, err);
     return NextResponse.json({ error: "Falha ao consultar a API IoT" }, { status: 502 });

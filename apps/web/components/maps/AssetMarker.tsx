@@ -21,8 +21,8 @@ export function AssetMarker({ assets, selected }: AssetMarkerProps) {
     <div className="relative">
       <div
         className={cn(
-          "flex size-9 items-center justify-center rounded-full border-[3px] bg-white shadow-lg transition-transform",
-          provisional && "border-dashed",
+          "flex items-center justify-center rounded-full border-[3px] bg-white shadow-lg transition-transform",
+          provisional ? "size-7 border-dashed" : "size-9",
           selected && "scale-125 ring-4 ring-white/80"
         )}
         style={{ borderColor: color }}
@@ -31,7 +31,7 @@ export function AssetMarker({ assets, selected }: AssetMarkerProps) {
           // eslint-disable-next-line @next/next/no-img-element
           <img src={`/icons/assets/${icon}`} alt={main.name} className="size-5" />
         ) : (
-          <svg viewBox="0 0 24 24" className="size-5" fill={color} aria-hidden>
+          <svg viewBox="0 0 24 24" className={provisional ? "size-4" : "size-5"} fill={color} aria-hidden>
             <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" />
           </svg>
         )}

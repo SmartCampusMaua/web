@@ -37,6 +37,8 @@ export function MapDashboard({ apiKey }: { apiKey: string }) {
             loading={loading}
             error={error}
             truncated={data?.truncated ?? false}
+            requests={data?.requests ?? []}
+            via={data?.via}
             onSelectAsset={setSelectedId}
             onClose={() => setSelectedId(null)}
           />
@@ -53,7 +55,7 @@ export function MapDashboard({ apiKey }: { apiKey: string }) {
       </div>
 
       <aside className={cn(aside, "order-3 max-h-[40vh] border-t lg:max-h-none lg:border-l lg:border-t-0", !open && "hidden lg:block")}>
-        {asset && <SeriesKpis series={data?.series ?? null} loading={loading} />}
+        {asset && <SeriesKpis series={data?.series ?? null} loading={loading} error={error} />}
       </aside>
     </div>
   );

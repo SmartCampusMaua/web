@@ -73,7 +73,7 @@ function KpiCard({ series }: { series: SensorSeries }) {
 }
 
 /** Painel direito: indicadores e consumo por hora. Cumulativos primeiro. */
-export function SeriesKpis({ series, loading }: { series: SensorSeries[] | null; loading: boolean }) {
+export function SeriesKpis({ series, loading, error }: { series: SensorSeries[] | null; loading: boolean; error: boolean }) {
   const ordered = [...(series ?? [])].sort(
     (a, b) =>
       Number(metricFor(b.sensorType).mode === "cumulative") -
@@ -82,6 +82,11 @@ export function SeriesKpis({ series, loading }: { series: SensorSeries[] | null;
   return (
     <div className="space-y-3 p-4">
       <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500">Indicadores</h2>
+      {!loading && (error || ordered.length === 0) && (
+        <p className="rounded-lg bg-white p-3 text-center text-xs italic text-gray-400">
+          {error ? "Não foi possível carregar os dados." : "Sem dados para exibir."}
+        </p>
+      )}
       {loading
         ? [0, 1].map((i) => <div key={i} className="h-40 animate-pulse rounded-xl bg-gray-100" />)
         : ordered.map((s) => <KpiCard key={s.sensorId} series={s} />)}
