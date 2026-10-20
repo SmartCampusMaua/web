@@ -12,11 +12,11 @@ import type { SensorSeries } from "@/lib/assets/types";
 
 function Stat({ label, value, digits, unit }: { label: string; value: number; digits: number; unit: string }) {
   return (
-    <div className="rounded-lg bg-gray-50 p-2">
-      <p className="text-[11px] uppercase tracking-wide text-gray-500">{label}</p>
-      <p className="text-base font-bold text-gray-900">
+    <div className="rounded-lg border border-white/70 bg-[#E5F0F8]/80 p-2">
+      <p className="text-[11px] uppercase tracking-wide text-slate-600">{label}</p>
+      <p className="text-base font-bold text-slate-900">
         {value.toLocaleString("pt-BR", { maximumFractionDigits: digits })}{" "}
-        <span className="text-xs font-normal text-gray-500">{unit}</span>
+        <span className="text-xs font-normal text-slate-600">{unit}</span>
       </p>
     </div>
   );
@@ -30,10 +30,10 @@ function KpiCard({ series }: { series: SensorSeries }) {
   const config = { value: { label: `${m.unit} na hora`, color: m.color } } satisfies ChartConfig;
 
   return (
-    <section className="rounded-xl border border-gray-200 bg-white p-3">
-      <h3 className="mb-2 text-sm font-semibold text-gray-900">{m.label}</h3>
+    <section className="rounded-xl border border-white/65 bg-[#F0F7FC]/90 p-3 shadow-[0_4px_16px_rgba(2,12,27,0.08)] backdrop-blur-[2px]">
+      <h3 className="mb-2 text-sm font-semibold text-slate-900">{m.label}</h3>
       {!stats ? (
-        <p className="py-4 text-center text-xs italic text-gray-400">Sem dados</p>
+        <p className="py-4 text-center text-xs italic text-slate-600">Sem dados</p>
       ) : (
         <>
           <div className="grid grid-cols-2 gap-2">
@@ -51,7 +51,7 @@ function KpiCard({ series }: { series: SensorSeries }) {
               </>
             )}
           </div>
-          <p className="mt-2 text-[11px] text-gray-400">
+          <p className="mt-2 text-[11px] text-slate-600">
             Última leitura: {new Date(stats.latest.t).toLocaleString("pt-BR")}
           </p>
           {cumulative && hourly.length > 0 && (
@@ -81,14 +81,14 @@ export function SeriesKpis({ series, loading, error }: { series: SensorSeries[] 
   );
   return (
     <div className="space-y-3 p-4">
-      <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500">Indicadores</h2>
+      <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-sky-50 drop-shadow-sm">Indicadores</h2>
       {!loading && (error || ordered.length === 0) && (
-        <p className="rounded-lg bg-white p-3 text-center text-xs italic text-gray-400">
+        <p className="rounded-lg border border-white/65 bg-[#F0F7FC]/85 p-3 text-center text-xs italic text-slate-600">
           {error ? "Não foi possível carregar os dados." : "Sem dados para exibir."}
         </p>
       )}
       {loading
-        ? [0, 1].map((i) => <div key={i} className="h-40 animate-pulse rounded-xl bg-gray-100" />)
+        ? [0, 1].map((i) => <div key={i} className="h-40 animate-pulse rounded-xl bg-slate-200/80" />)
         : ordered.map((s) => <KpiCard key={s.sensorId} series={s} />)}
     </div>
   );

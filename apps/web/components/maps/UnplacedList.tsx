@@ -1,11 +1,10 @@
 "use client";
 
-import type { PlacedAsset } from "@/lib/assets/types";
-import { KIND_EMOJI } from "@/lib/asset-metrics";
+import type { Asset } from "@/lib/assets/types";
 import { cn } from "@/lib/utils";
 
 interface Props {
-  assets: PlacedAsset[];
+  assets: Asset[];
   selectedId: string | null;
   onSelect: (id: string) => void;
 }
@@ -28,7 +27,7 @@ export function UnplacedList({ assets, selectedId, onSelect }: Props) {
                 a.id === selectedId && "bg-gray-100 font-medium"
               )}
             >
-              {KIND_EMOJI[a.kind]} {a.name}
+              {a.name}
             </button>
           </li>
         ))}

@@ -24,12 +24,12 @@ function LineCard({ series }: { series: SensorSeries }) {
   const config = { v: { label: m.label, color: m.color } } satisfies ChartConfig;
 
   return (
-    <section className="rounded-xl border border-gray-200 bg-white p-3">
-      <h3 className="text-sm font-semibold text-gray-900">
-        {m.label} {m.unit && <span className="font-normal text-gray-500">({m.unit})</span>}
+    <section className="rounded-xl border border-white/65 bg-[#F0F7FC]/90 p-3 shadow-[0_4px_16px_rgba(2,12,27,0.08)] backdrop-blur-[2px]">
+      <h3 className="text-sm font-semibold text-slate-900">
+        {m.label} {m.unit && <span className="font-normal text-slate-600">({m.unit})</span>}
       </h3>
       {series.points.length === 0 ? (
-        <p className="py-8 text-center text-xs italic text-gray-400">Sem leituras neste período</p>
+        <p className="py-8 text-center text-xs italic text-slate-600">Sem leituras neste período</p>
       ) : (
         <ChartContainer config={config} className="aspect-auto mt-2 h-36 w-full">
           <AreaChart data={series.points}>
@@ -79,10 +79,10 @@ export function SeriesCharts(p: Props) {
     <div className="space-y-3 p-4">
       <header className="flex items-start justify-between gap-2">
         <div>
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 className="text-lg font-semibold text-white drop-shadow-sm">
             {p.siblings.length > 1 ? p.placeName : p.asset.name}
           </h2>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-sky-100/90">
             Dashboards disponíveis:{" "}
             {dashboardsFromTypes(
               p.series?.length
@@ -92,7 +92,7 @@ export function SeriesCharts(p: Props) {
           </p>
         </div>
         <button onClick={p.onClose} aria-label="Fechar painel"
-          className="text-xl leading-none text-gray-400 hover:text-gray-600">×</button>
+          className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 bg-slate-900 text-2xl leading-none text-white shadow-sm transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">×</button>
       </header>
 
       {p.siblings.length > 1 && (
@@ -100,20 +100,20 @@ export function SeriesCharts(p: Props) {
           {p.siblings.map((a) => (
             <button key={a.id} onClick={() => p.onSelectAsset(a.id)}
               className={cn("rounded-full border px-2.5 py-1 text-xs",
-                a.id === p.asset.id ? "border-gray-900 bg-gray-900 text-white"
-                  : "border-gray-300 bg-white text-gray-700 hover:bg-gray-100")}>
+                a.id === p.asset.id ? "border-blue-700 bg-blue-700 text-white"
+                  : "border-sky-100/25 bg-slate-950/25 text-sky-50 hover:bg-sky-100/15")}>
               {tabLabel(a, p.siblings, p.placeName)}
             </button>
           ))}
         </div>
       )}
 
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-sky-100/90">
         Últimas {QUERY.intervalMinutes / 60}h (intervalo {QUERY.intervalMinutes} min, limite {QUERY.limit} leituras)
       </p>
 
       {p.asset.provisional && (
-        <p className="rounded-lg bg-gray-100 p-2 text-xs text-gray-600">
+        <p className="rounded-lg border border-slate-200/80 bg-[#E7F1F9]/90 p-2 text-xs text-slate-700">
           📍 Posição provisória no mapa. Para fixar, adicione em{" "}
           <code>lib/assets/locations.ts</code>:
           <br />
@@ -122,19 +122,19 @@ export function SeriesCharts(p: Props) {
       )}
 
       {p.error && (
-        <p className="rounded-lg bg-yellow-50 p-2 text-xs text-yellow-800">
+        <p className="rounded-lg border border-amber-200 bg-amber-50 p-2 text-xs text-amber-900">
           Não foi possível carregar os dados da API IoT.
         </p>
       )}
       {p.truncated && (
-        <p className="rounded-lg bg-blue-50 p-2 text-xs text-blue-800">
+        <p className="rounded-lg border border-blue-200 bg-blue-50 p-2 text-xs text-blue-900">
           A consulta é limitada a {QUERY.limit} leituras: mostrando as mais recentes.
         </p>
       )}
 
       {!p.loading && !p.error && p.series && p.series.length === 0 && (
-        <div className="rounded-xl border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-600">
-          <p className="font-medium text-gray-800">A API não devolveu leituras para este local.</p>
+        <div className="rounded-xl border border-dashed border-white/55 bg-[#F0F7FC]/85 p-4 text-sm text-slate-700 shadow-sm backdrop-blur-[2px]">
+          <p className="font-medium text-slate-900">A API não devolveu leituras para este local.</p>
           <p className="mt-1 text-xs">
             Nas últimas {QUERY.intervalMinutes / 60}h não há dados, ou o device ainda não está
             vinculado a este asset. Confira a resposta direto na API:
@@ -152,11 +152,11 @@ export function SeriesCharts(p: Props) {
       )}
 
       {p.loading
-        ? [0, 1].map((i) => <div key={i} className="h-44 animate-pulse rounded-xl bg-gray-100" />)
+        ? [0, 1].map((i) => <div key={i} className="h-44 animate-pulse rounded-xl bg-slate-200/80" />)
         : lines.map((s) => <LineCard key={s.sensorId} series={s} />)}
 
       {p.via && !p.loading && p.series && p.series.length > 0 && (
-        <p className="pt-1 text-center text-[11px] text-gray-400">via {p.via}</p>
+        <p className="pt-1 text-center text-[11px] text-sky-100/75">via {p.via}</p>
       )}
 
     </div>
