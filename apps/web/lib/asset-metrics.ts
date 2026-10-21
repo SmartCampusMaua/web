@@ -10,16 +10,16 @@ export interface MetricDef {
 }
 
 export const METRICS: Record<string, MetricDef> = {
-  voltage_u_ll_avg: { label: "Tensão", unit: "V", color: "#8b5cf6", mode: "level", digits: 1 },
-  current_i_avg: { label: "Corrente", unit: "A", color: "#f59e0b", mode: "level", digits: 1 },
-  power_factor: { label: "Fator de potência", unit: "", color: "#10b981", mode: "level", digits: 2 },
+  voltage_u_ll_avg: { label: "Tensão", unit: "V", color: "#a78bfa", mode: "level", digits: 1 },
+  current_i_avg: { label: "Corrente", unit: "A", color: "#fbbf24", mode: "level", digits: 1 },
+  power_factor: { label: "Fator de potência", unit: "", color: "#34d399", mode: "level", digits: 2 },
   // ASSUNÇÃO: energy_a_plus é um contador acumulado em kWh. Ajuste a unidade aqui se for Wh.
-  energy_a_plus: { label: "Consumo de energia", unit: "kWh", color: "#ef4444", mode: "cumulative", digits: 1 },
-  water_level: { label: "Nível da água", unit: "m", color: "#3b82f6", mode: "level", digits: 2 },
-  energy_a_minus: { label: "Energia exportada", unit: "kWh", color: "#14b8a6", mode: "cumulative", digits: 1 },
+  energy_a_plus: { label: "Consumo de energia", unit: "kWh", color: "#fb7185", mode: "cumulative", digits: 1 },
+  water_level: { label: "Nível da água", unit: "m", color: "#38bdf8", mode: "level", digits: 2 },
+  energy_a_minus: { label: "Energia exportada", unit: "kWh", color: "#2dd4bf", mode: "cumulative", digits: 1 },
   // ASSUNÇÃO: pulse_count é o contador do hidrômetro; a unidade real (litros/pulso) não está na planilha.
-  pulse_count: { label: "Consumo (hidrômetro)", unit: "pulsos", color: "#0ea5e9", mode: "cumulative", digits: 0 },
-  battery_level: { label: "Bateria", unit: "%", color: "#64748b", mode: "level", digits: 0 },
+  pulse_count: { label: "Consumo (hidrômetro)", unit: "pulsos", color: "#22d3ee", mode: "cumulative", digits: 0 },
+  battery_level: { label: "Bateria", unit: "%", color: "#94a3b8", mode: "level", digits: 0 },
 };
 
 export const metricFor = (sensorType: string): MetricDef =>

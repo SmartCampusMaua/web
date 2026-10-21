@@ -40,7 +40,15 @@ export interface AssetPlace {
   assets: MapAsset[];
 }
 
-/* ---------- Timeseries (contrato entre /api/assets/[id]/timeseries e o front) ---------- */
+/* ---------- Timeseries (contrato entre a rota /maps/data/[id] e o front) ---------- */
+
+/**
+ * Rota do Next que entrega as séries de um asset ao navegador.
+ * NÃO pode começar com /api: em produção, iot.maua.br/api/* é roteado para a API IoT
+ * (outro serviço), então /api/assets/... dava 404 no site no ar. O arquivo da rota
+ * precisa ficar em app/maps/data/[assetId]/route.ts para casar com este caminho.
+ */
+export const timeseriesPath = (assetId: string) => `/maps/data/${assetId}`;
 
 /** Parâmetros fixos da consulta à API IoT. */
 export const QUERY = { intervalMinutes: 300, limit: 1000 } as const;
