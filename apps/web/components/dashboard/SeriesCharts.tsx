@@ -26,19 +26,15 @@ function LineCard({ series }: { series: SensorSeries }) {
 
   return (
     <section className={GLASS_CARD}>
-      <h3 className="text-sm font-semibold text-white">
-        {m.label} {m.unit && <span className="font-normal text-slate-400">({m.unit})</span>}
+      <h3 className="text-sm font-semibold text-slate-900">
+        {m.label} {m.unit && <span className="font-normal text-slate-600">({m.unit})</span>}
       </h3>
       {series.points.length === 0 ? (
-        <p className="py-8 text-center text-xs italic text-slate-500">Sem leituras neste período</p>
+        <p className="py-8 text-center text-xs italic text-slate-600">Sem leituras neste período</p>
       ) : (
         <ChartContainer
           config={config}
-          className={cn(
-            "aspect-auto mt-2 h-36 w-full",
-            "[&_.recharts-area-curve]:drop-shadow-[0_0_6px_var(--color-v)]",
-            CHART_DARK
-          )}
+          className={cn("aspect-auto mt-2 h-36 w-full", CHART_DARK)}
         >
           <AreaChart data={series.points}>
             <defs>
@@ -49,14 +45,14 @@ function LineCard({ series }: { series: SensorSeries }) {
             </defs>
             <CartesianGrid vertical={false} stroke={GRID_STROKE} />
             <XAxis dataKey="t" type="number" scale="time" domain={["dataMin", "dataMax"]}
-              axisLine={false} tickLine={false} tickMargin={8} minTickGap={40} tickFormatter={fmtTick} />
-            <YAxis width={44} axisLine={false} tickLine={false} domain={["auto", "auto"]} />
-            <ChartTooltip cursor={{ stroke: "rgba(255,255,255,0.25)" }} content={
+              axisLine={false} tickMargin={8} minTickGap={40} tickFormatter={fmtTick} />
+            <YAxis width={44} domain={["auto", "auto"]} />
+            <ChartTooltip cursor={false} content={
               <ChartTooltipContent indicator="dot" className={TOOLTIP_DARK}
                 labelFormatter={(_, p) => fmtFull(p?.[0]?.payload?.t)} />
             } />
-            <Area dataKey="v" type="monotone" stroke="var(--color-v)" strokeWidth={2}
-              fill={`url(#g-${series.sensorId})`} dot={false} isAnimationActive={false} />
+            <Area dataKey="v" type="monotone" stroke="var(--color-v)" fill={`url(#g-${series.sensorId})`}
+              fillOpacity={0.2} dot={false} isAnimationActive={false} />
           </AreaChart>
         </ChartContainer>
       )}
@@ -95,10 +91,10 @@ export function SeriesCharts(p: Props) {
     <div className="space-y-3 p-4">
       <header className="flex items-start justify-between gap-2">
         <div>
-          <h2 className="text-lg font-semibold tracking-tight text-white drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]">
+          <h2 className="text-lg font-semibold tracking-tight text-white drop-shadow-sm">
             {p.siblings.length > 1 ? p.placeName : p.asset.name}
           </h2>
-          <p className="text-xs text-cyan-200/70">
+          <p className="text-xs text-sky-100/90">
             Dashboards disponíveis:{" "}
             {dashboardsFromTypes(
               p.series?.length
@@ -127,49 +123,49 @@ export function SeriesCharts(p: Props) {
             <button key={a.id} onClick={() => p.onSelectAsset(a.id)}
               className={cn("rounded-full border px-2.5 py-1 text-xs transition",
                 a.id === p.asset.id
-                  ? "border-cyan-300/60 bg-cyan-400/20 text-cyan-50 shadow-[0_0_14px_rgba(34,211,238,0.4)]"
-                  : "border-white/15 text-slate-300 hover:border-white/30 hover:bg-white/10")}>
+                  ? "border-blue-700 bg-blue-700 text-white"
+                  : "border-sky-100/25 bg-slate-950/25 text-sky-50 hover:bg-sky-100/15")}>
               {tabLabel(a, p.siblings, p.placeName)}
             </button>
           ))}
         </div>
       )}
 
-      <p className="text-[11px] uppercase tracking-wider text-slate-400">
-        Últimas {QUERY.intervalMinutes / 60}h · intervalo {QUERY.intervalMinutes} min · limite {QUERY.limit}
+      <p className="text-xs text-sky-100/90">
+        Últimas {QUERY.intervalMinutes / 60}h (intervalo {QUERY.intervalMinutes} min, limite {QUERY.limit} leituras)
       </p>
 
       {p.asset.provisional && (
-        <p className={cn(NOTICE, "border-white/15 bg-white/5 text-slate-300")}>
+        <p className={cn(NOTICE, "border-slate-200/80 bg-[#E7F1F9]/90 text-slate-700")}>
           📍 Posição provisória no mapa. Para fixar, adicione em{" "}
-          <code className="text-cyan-200">lib/assets/locations.ts</code>:
+          <code>lib/assets/locations.ts</code>:
           <br />
-          <code className="break-all text-[11px] text-cyan-200">&quot;{p.asset.id}&quot;: {"{ lat: , lng:  }"}</code>
+          <code className="break-all text-[11px]">&quot;{p.asset.id}&quot;: {"{ lat: , lng:  }"}</code>
         </p>
       )}
 
       {p.error && (
-        <p className={cn(NOTICE, "border-amber-300/30 bg-amber-400/10 text-amber-100")}>
+        <p className={cn(NOTICE, "border-amber-200 bg-amber-50 text-amber-900")}>
           Não foi possível carregar os dados da API IoT.
         </p>
       )}
       {p.truncated && (
-        <p className={cn(NOTICE, "border-sky-300/30 bg-sky-400/10 text-sky-100")}>
+        <p className={cn(NOTICE, "border-blue-200 bg-blue-50 text-blue-900")}>
           A consulta é limitada a {QUERY.limit} leituras: mostrando as mais recentes.
         </p>
       )}
 
       {!p.loading && !p.error && p.series && p.series.length === 0 && (
-        <div className="rounded-xl border border-dashed border-white/20 bg-white/[0.03] p-4 text-sm text-slate-300">
-          <p className="font-medium text-white">A API não devolveu leituras para este local.</p>
-          <p className="mt-1 text-xs text-slate-400">
+        <div className="rounded-xl border border-dashed border-white/55 bg-[#F0F7FC]/85 p-4 text-sm text-slate-700 shadow-sm backdrop-blur-[2px]">
+          <p className="font-medium text-slate-900">A API não devolveu leituras para este local.</p>
+          <p className="mt-1 text-xs">
             Nas últimas {QUERY.intervalMinutes / 60}h não há dados, ou o device ainda não está
             vinculado a este asset. Confira a resposta direto na API:
           </p>
           <ul className="mt-2 space-y-1 text-xs">
             {p.requests.map((u) => (
               <li key={u}>
-                <a href={u} target="_blank" rel="noreferrer" className="break-all text-cyan-300 underline underline-offset-2">
+                <a href={u} target="_blank" rel="noreferrer" className="break-all text-blue-600 underline">
                   {u.includes("assetId") ? "consulta por assetId" : "consulta por sensorId"}
                 </a>
               </li>
@@ -179,11 +175,11 @@ export function SeriesCharts(p: Props) {
       )}
 
       {p.loading
-        ? [0, 1].map((i) => <div key={i} className="h-44 animate-pulse rounded-xl bg-white/10" />)
+        ? [0, 1].map((i) => <div key={i} className="h-44 animate-pulse rounded-xl bg-slate-200/80" />)
         : lines.map((s) => <LineCard key={s.sensorId} series={s} />)}
 
       {p.via && !p.loading && p.series && p.series.length > 0 && (
-        <p className="pt-1 text-center text-[11px] text-slate-500">via {p.via}</p>
+        <p className="pt-1 text-center text-[11px] text-sky-100/75">via {p.via}</p>
       )}
     </div>
   );

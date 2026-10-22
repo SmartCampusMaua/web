@@ -28,7 +28,7 @@ export function AssetMarker({ assets, selected }: AssetMarkerProps) {
         className={cn(
           "flex items-center justify-center rounded-full border-[3px] bg-white shadow-lg transition-transform",
           provisional ? "size-7 border-dashed" : "size-9",
-          selected && "scale-125 ring-4 ring-cyan-300/70 shadow-[0_0_22px_rgba(34,211,238,0.9)]"
+          selected && "scale-125 ring-4 ring-white/80"
         )}
         style={{ borderColor: color }}
       >
