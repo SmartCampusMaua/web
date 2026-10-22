@@ -1,7 +1,9 @@
 "use client";
 
+import { getPlaceKind } from "@/lib/assets";
 import type { MapAsset } from "@/lib/assets/types";
 import { cn } from "@/lib/utils";
+import { BOLT_PATH, DROP_PATH, PIN_PATH } from "./asset-icons";
 
 interface AssetMarkerProps {
   assets: MapAsset[];
@@ -16,6 +18,9 @@ export function AssetMarker({ assets, selected }: AssetMarkerProps) {
   const provisional = assets.every((a) => a.provisional);
   const color = provisional ? "#9ca3af" : (main.location.color ?? PIN_COLOR);
   const icon = main.location.icon;
+  const kind = getPlaceKind(assets);
+  const glyphPath =
+    kind === "energy" ? BOLT_PATH : kind === "water" ? DROP_PATH : PIN_PATH;
 
   return (
     <div className="relative">
@@ -32,7 +37,7 @@ export function AssetMarker({ assets, selected }: AssetMarkerProps) {
           <img src={`/icons/assets/${icon}`} alt={main.name} className="size-5" />
         ) : (
           <svg viewBox="0 0 24 24" className={provisional ? "size-4" : "size-5"} fill={color} aria-hidden>
-            <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" />
+            <path d={glyphPath} />
           </svg>
         )}
       </div>

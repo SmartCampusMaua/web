@@ -1,0 +1,71 @@
+"use client";
+
+import {
+  AdvancedMarker,
+  APIProvider,
+  Map,
+  useMap,
+} from "@vis.gl/react-google-maps";
+import { useEffect } from "react";
+import type { AssetPlace, MapAsset } from "@/lib/assets/types";
+import { AssetMarker } from "./AssetMarker";
+
+interface AssetMapProps {
+  apiKey: string;
+  places: AssetPlace[];
+  selectedAssetId: string | null;
+  onSelectAsset: (id: string | null) => void;
+}
+
+const CAMPUS_CENTER = { lat: -23.6478, lng: -46.5754 };
+
+function PanToSelected({ asset }: { asset: MapAsset | null }) {
+  const map = useMap();
+  useEffect(() => {
+    if (map && asset) map.panTo(asset.location);
+  }, [map, asset]);
+  return null;
+}
+
+export function AssetMap({
+  apiKey,
+  places,
+  selectedAssetId,
+  onSelectAsset,
+}: AssetMapProps) {
+  const selectedAsset =
+    places.flatMap((p) => p.assets).find((a) => a.id === selectedAssetId) ??
+    null;
+
+  return (
+    <APIProvider apiKey={apiKey}>
+      <Map
+        mapTypeId="satellite"
+        // AdvancedMarker exige mapId. O aviso do Google sobre "satellite + mapId" é inofensivo.
+        mapId={process.env.NEXT_PUBLIC_GOOGLE_MAP_ID ?? "DEMO_MAP_ID"}
+        defaultCenter={CAMPUS_CENTER}
+        defaultZoom={16}
+        gestureHandling="greedy"
+        className="h-full w-full"
+        onClick={() => onSelectAsset(null)}
+      >
+        {places.map((place) => {
+          const selected = place.assets.some((a) => a.id === selectedAssetId);
+          return (
+            <AdvancedMarker
+              key={place.key}
+              position={{ lat: place.lat, lng: place.lng }}
+              title={place.name}
+              zIndex={selected ? 10 : 1}
+              // se o local já está selecionado, mantém o dashboard atual
+              onClick={() => !selected && onSelectAsset(place.assets[0].id)}
+            >
+              <AssetMarker assets={place.assets} selected={selected} />
+            </AdvancedMarker>
+          );
+        })}
+        <PanToSelected asset={selectedAsset} />
+      </Map>
+    </APIProvider>
+  );
+}

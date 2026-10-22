@@ -2,6 +2,32 @@ import { ASSET_LOCATIONS } from "./locations";
 import { ASSET_REGISTRY } from "./registry.generated";
 import type { Asset, AssetLocation, AssetPlace, MapAsset } from "./types";
 
+const ENERGY_SENSOR_TYPES = new Set([
+  "voltage_u_ll_avg",
+  "current_i_avg",
+  "power_factor",
+  "energy_a_plus",
+]);
+const WATER_SENSOR_TYPES = new Set(["water_level", "pulse_count"]);
+
+export type AssetKind = "energy" | "water" | "generic";
+
+/** Classifica um asset pelo tipo dos sensores que ele carrega. */
+export function getAssetKind(asset: Asset): AssetKind {
+  if (asset.sensors.some((s) => ENERGY_SENSOR_TYPES.has(s.type))) return "energy";
+  if (asset.sensors.some((s) => WATER_SENSOR_TYPES.has(s.type))) return "water";
+  return "generic";
+}
+
+/** Um local pode agrupar vários assets; usa o primeiro tipo reconhecido. */
+export function getPlaceKind(assets: Asset[]): AssetKind {
+  for (const asset of assets) {
+    const kind = getAssetKind(asset);
+    if (kind !== "generic") return kind;
+  }
+  return "generic";
+}
+
 /**
  * Enquanto um asset não tem coordenada em locations.ts, ele fica numa grade
  * provisória ao norte do campus, para já aparecer no mapa com os dados certos.

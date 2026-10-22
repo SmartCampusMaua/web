@@ -28,6 +28,25 @@ function buildUrl(filter: Record<string, string>) {
   return url;
 }
 
+// "Último mês" = 30 dias, em minutos (unidade que a API IoT usa para o interval).
+const EXPORT_INTERVAL_MINUTES = 30 * 24 * 60;
+// Sem limit explícito a API aplica o default dela (bem menor que 30 dias de leituras);
+// 10000 garante que o intervalo de 30 dias não seja cortado antes da hora.
+const EXPORT_LIMIT = 10_000;
+
+/** CSV bruto do último mês de leituras de um asset, direto da API IoT. */
+export async function fetchAssetExportCsv(asset: Asset): Promise<string> {
+  const url = new URL(`${BASE_URL}/export`);
+  url.searchParams.set("format", "csv");
+  url.searchParams.set("assetId", asset.id);
+  url.searchParams.set("interval", String(EXPORT_INTERVAL_MINUTES));
+  url.searchParams.set("limit", String(EXPORT_LIMIT));
+
+  const res = await fetch(url, { signal: AbortSignal.timeout(30_000) });
+  if (!res.ok) throw new Error(`API IoT (export) respondeu ${res.status}`);
+  return res.text();
+}
+
 async function query(url: URL): Promise<RawSeries[]> {
   const res = await fetch(url, {
     next: { revalidate: 30 },
