@@ -4,7 +4,9 @@ import { fetchAssetExportCsv } from "@/lib/iot-api";
 
 const DIACRITICS = /[\u0300-\u036f]/g;
 
-// Proxy fino, igual ao de /timeseries: só aceita asset_ids do cadastro.
+// NÃO pode começar com /api: em produção, iot.maua.br/api/* é roteado para a
+// API IoT (outro serviço) — ver lib/assets/types.ts (timeseriesPath).
+// Proxy fino, igual ao de /maps/data: só aceita asset_ids do cadastro.
 export async function GET(
   _req: Request,
   { params }: { params: Promise<{ assetId: string }> }

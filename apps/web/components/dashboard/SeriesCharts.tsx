@@ -105,7 +105,7 @@ export function SeriesCharts(p: Props) {
         </div>
         <div className="flex shrink-0 items-center gap-2">
           <a
-            href={`/api/assets/${p.asset.id}/export`}
+            href={`/maps/export/${p.asset.id}`}
             download
             title="Exportar leituras do último mês em CSV"
             className="inline-flex h-9 items-center gap-1 rounded-full border border-slate-300 bg-slate-900 px-3 text-xs font-medium text-white shadow-sm transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
