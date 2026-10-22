@@ -16,7 +16,7 @@ export function MapDashboard({ apiKey }: { apiKey: string }) {
   const place = places.find((p) => p.assets.some((a) => a.id === selectedId)) ?? null;
   const { data, loading, error } = useAssetTimeseries(selectedId);
 
-  const aside = "smartcampus-glass-scrollbar min-h-0 min-w-0 overflow-y-auto bg-[#102B46]/75 text-white backdrop-blur-[3px] border-sky-100/20 shadow-[0_8px_28px_rgba(2,12,27,0.22)]";
+  const aside = "smartcampus-glass-scrollbar min-h-0 min-w-0 overflow-y-auto bg-[#102B46]/55 text-white backdrop-blur-[1.5px] border-sky-100/20 shadow-[0_8px_28px_rgba(2,12,27,0.22)]";
   const open = asset !== null;
 
   return (

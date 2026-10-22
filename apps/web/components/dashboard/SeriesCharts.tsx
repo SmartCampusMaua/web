@@ -91,8 +91,18 @@ export function SeriesCharts(p: Props) {
             ).join(" · ") || "—"}
           </p>
         </div>
-        <button onClick={p.onClose} aria-label="Fechar painel"
-          className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 bg-slate-900 text-2xl leading-none text-white shadow-sm transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">×</button>
+        <div className="flex shrink-0 items-center gap-2">
+          <a
+            href={`/api/assets/${p.asset.id}/export`}
+            download
+            title="Exportar leituras do último mês em CSV"
+            className="inline-flex h-9 items-center gap-1 rounded-full border border-slate-300 bg-slate-900 px-3 text-xs font-medium text-white shadow-sm transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+          >
+            ⭳ CSV
+          </a>
+          <button onClick={p.onClose} aria-label="Fechar painel"
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 bg-slate-900 text-2xl leading-none text-white shadow-sm transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">×</button>
+        </div>
       </header>
 
       {p.siblings.length > 1 && (
