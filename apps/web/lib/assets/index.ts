@@ -41,7 +41,7 @@ const stagingSpot = (i: number): AssetLocation => ({
 
 function toMapAssets(assets: Asset[]): MapAsset[] {
   let staged = 0;
-  return assets.map((a) => {
+  return assets.filter((a) => ASSET_LOCATIONS[a.id]).map((a) => {
     const location = ASSET_LOCATIONS[a.id];
     return location
       ? { ...a, location, provisional: false }
