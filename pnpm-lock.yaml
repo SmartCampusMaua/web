@@ -22,10 +22,10 @@ importers:
     dependencies:
       '@elysiajs/cors':
         specifier: ^1.4.1
-        version: 1.4.1(elysia@1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.3.14)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3))
+        version: 1.4.1(elysia@1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.4.3)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3))
       '@elysiajs/openapi':
         specifier: ^1.4.14
-        version: 1.4.14(elysia@1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.3.14)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3))
+        version: 1.4.14(elysia@1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.4.3)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3))
       '@influxdata/influxdb3-client':
         specifier: ^1.0.0
         version: 1.4.0
@@ -46,7 +46,7 @@ importers:
         version: 7.9.0
       elysia:
         specifier: ^1.3.2
-        version: 1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.3.14)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3)
+        version: 1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.4.3)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3)
       jsdom:
         specifier: ^29.0.1
         version: 29.0.1(@noble/hashes@1.8.0)
@@ -62,7 +62,7 @@ importers:
     devDependencies:
       '@types/bun':
         specifier: latest
-        version: 1.3.14
+        version: 1.4.3
       bun-types:
         specifier: ^1.3.11
         version: 1.3.11
@@ -76,8 +76,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/types
       '@vis.gl/react-google-maps':
-        specifier: ^1.6.0
-        version: 1.7.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^1.10.1
+        version: 1.10.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -431,6 +431,9 @@ packages:
 
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
+
+  '@googlemaps/js-api-loader@2.1.3':
+    resolution: {integrity: sha512-1t6umwRufEGzIPjHPjPeuuY1dCal0zU2bZeomkf4OA0MprFdlKCnXY3zeFkzDaCvKjwbFubeapm61P5+EbrAoA==}
 
   '@grpc/grpc-js@1.14.3':
     resolution: {integrity: sha512-Iq8QQQ/7X3Sac15oB6p0FmUg/klxQvXLeileoqrTRGJYLV+/9tubbr9ipz0GKHjmXVsgFPo/+W+2cA8eNcR+XA==}
@@ -1700,8 +1703,8 @@ packages:
   '@tybys/wasm-util@0.10.1':
     resolution: {integrity: sha512-9tTaPJLSiejZKx+Bmog4uSubteqTvFrVrURwkmHixBo0G4seD0zUxp98E1DzUBJxLQ3NPwXrGKDiVjwx/DpPsg==}
 
-  '@types/bun@1.3.14':
-    resolution: {integrity: sha512-h1hFqFVcvAvD9j9K7ZW7vd82aSA+rTdznZa+5bwvCwqSB1jmmfLcbIWhOLx1/+boy/xmjgCs/OMUL8hRJSmnPw==}
+  '@types/bun@1.4.3':
+    resolution: {integrity: sha512-N67Pqy8JXbAY/j0tNraS3V5mubGvc6rrrNDmDCtZLlFzccbUJPDb0tvgUBC5q4m8ybkP93Jcn1QB+RYQ6PvBhw==}
 
   '@types/command-line-args@5.2.3':
     resolution: {integrity: sha512-uv0aG6R0Y8WHZLTamZwtfsDLVRnOa+n+n5rEvFWL5Na5gZ8V2Teab/duDPFzIIIhs9qizDpcavCusCLJZu62Kw==}
@@ -1808,8 +1811,8 @@ packages:
   '@types/geojson@7946.0.16':
     resolution: {integrity: sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==}
 
-  '@types/google.maps@3.58.1':
-    resolution: {integrity: sha512-X9QTSvGJ0nCfMzYOnaVs/k6/4L+7F5uCS+4iUmkLEls6J9S/Phv+m/i3mDeyc49ZBgwab3EFO1HEoBY7k98EGQ==}
+  '@types/google.maps@3.66.7':
+    resolution: {integrity: sha512-4EhLRkBtF5TMBAifddMeK+tn5MS6Sa6cMwrg4TbQiPlV4nU9IbKwHJ5csBfnpykNmXwqy+a9y0/38ZezOwtxmg==}
 
   '@types/jsdom@28.0.1':
     resolution: {integrity: sha512-GJq2QE4TAZ5ajSoCasn5DOFm8u1mI3tIFvM5tIq3W5U/RTB6gsHwc6Yhpl91X9VSDOUVblgXmG+2+sSvFQrdlw==}
@@ -2008,8 +2011,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@vis.gl/react-google-maps@1.7.1':
-    resolution: {integrity: sha512-F/GJzJyri7Jqf+bkLNxoi2RcH2hCIo1I3//PyiILqQzdzglMoqZVO1DLXlHPifNdebk1/zib6dMJA3i73nwmuQ==}
+  '@vis.gl/react-google-maps@1.10.1':
+    resolution: {integrity: sha512-2a6Bv04WcJIVN7IIjqygzVrmWKIgTXn/lmMdjeRWbKxX5FV6/Y3LhFScGJAKfAKqoAYIG6s31CWebhFUQdmBsw==}
     peerDependencies:
       react: '>=16.8.0 || ^19.0 || ^19.0.0-rc'
       react-dom: '>=16.8.0 || ^19.0 || ^19.0.0-rc'
@@ -2170,8 +2173,8 @@ packages:
   bun-types@1.3.11:
     resolution: {integrity: sha512-1KGPpoxQWl9f6wcZh57LvrPIInQMn2TQ7jsgxqpRzg+l0QPOFvJVH7HmvHo/AiPgwXy+/Thf6Ov3EdVn1vOabg==}
 
-  bun-types@1.3.14:
-    resolution: {integrity: sha512-4N0ig0fEomHt5R0KCFWjovxow98rIoRwKolrYdCcknNwMekCXRnWEUvgu5soYV8QXtVsrUD8B95MBOZGPvr6KQ==}
+  bun-types@1.4.3:
+    resolution: {integrity: sha512-tinRJNGOmUN+tEAsn2y2e942n9JHRHR42iUYzDH75NmhJqVBokGSQkkfSFdNWwsANIdrK6ACH9t01M452YyTwg==}
 
   bundle-name@4.1.0:
     resolution: {integrity: sha512-tjwM5exMg6BGRI+kNmTntNsvdZS1X8BFYS6tnJ2hdH0kVxM6/eVZ2xy+FqStSWvYmtfFMDLIxurorHwDKfDz5Q==}
@@ -2776,6 +2779,7 @@ packages:
   eslint@9.39.4:
     resolution: {integrity: sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -2854,6 +2858,10 @@ packages:
 
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
+
+  fast-equals@6.2.1:
+    resolution: {integrity: sha512-s7KFkLPAAbIDGTh+nVYhjTiwKGvgMXAUG5vwzg8vQKj7NSRZ4eEGExBQ4rq9V90fTYVWd1cb/Wr4ffCNBmLQMQ==}
+    engines: {node: '>=6.0.0'}
 
   fast-glob@3.3.1:
     resolution: {integrity: sha512-kNFPyjhh5cKjrUltxs+wFx+ZkbRaxxmZ+X0ZU31SOsxCEtP9VPgtq2teZw1DebupL5GmDaNQ6yKMMVcM41iqDg==}
@@ -4840,13 +4848,13 @@ snapshots:
     dependencies:
       '@noble/ciphers': 1.3.0
 
-  '@elysiajs/cors@1.4.1(elysia@1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.3.14)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3))':
+  '@elysiajs/cors@1.4.1(elysia@1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.4.3)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3))':
     dependencies:
-      elysia: 1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.3.14)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3)
+      elysia: 1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.4.3)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3)
 
-  '@elysiajs/openapi@1.4.14(elysia@1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.3.14)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3))':
+  '@elysiajs/openapi@1.4.14(elysia@1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.4.3)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3))':
     dependencies:
-      elysia: 1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.3.14)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3)
+      elysia: 1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.4.3)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3)
 
   '@emnapi/core@1.9.1':
     dependencies:
@@ -4930,6 +4938,10 @@ snapshots:
       react-dom: 19.2.4(react@19.2.4)
 
   '@floating-ui/utils@0.2.11': {}
+
+  '@googlemaps/js-api-loader@2.1.3':
+    dependencies:
+      '@types/google.maps': 3.66.7
 
   '@grpc/grpc-js@1.14.3':
     dependencies:
@@ -6149,9 +6161,9 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@types/bun@1.3.14':
+  '@types/bun@1.4.3':
     dependencies:
-      bun-types: 1.3.14
+      bun-types: 1.4.3
 
   '@types/command-line-args@5.2.3': {}
 
@@ -6278,7 +6290,7 @@ snapshots:
 
   '@types/geojson@7946.0.16': {}
 
-  '@types/google.maps@3.58.1': {}
+  '@types/google.maps@3.66.7': {}
 
   '@types/jsdom@28.0.1':
     dependencies:
@@ -6465,10 +6477,11 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
-  '@vis.gl/react-google-maps@1.7.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@vis.gl/react-google-maps@1.10.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@types/google.maps': 3.58.1
-      fast-deep-equal: 3.1.3
+      '@googlemaps/js-api-loader': 2.1.3
+      '@types/google.maps': 3.66.7
+      fast-equals: 6.2.1
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
@@ -6667,9 +6680,10 @@ snapshots:
     dependencies:
       '@types/node': 20.19.37
 
-  bun-types@1.3.14:
+  bun-types@1.4.3:
     dependencies:
       '@types/node': 20.19.37
+      undici-types: 7.24.6
 
   bundle-name@4.1.0:
     dependencies:
@@ -7072,7 +7086,7 @@ snapshots:
 
   electron-to-chromium@1.5.321: {}
 
-  elysia@1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.3.14)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3):
+  elysia@1.4.28(@sinclair/typebox@0.34.48)(@types/bun@1.4.3)(exact-mirror@0.2.7(@sinclair/typebox@0.34.48))(file-type@21.3.3)(openapi-types@12.1.3)(typescript@5.9.3):
     dependencies:
       '@sinclair/typebox': 0.34.48
       cookie: 1.1.1
@@ -7082,7 +7096,7 @@ snapshots:
       memoirist: 0.4.0
       openapi-types: 12.1.3
     optionalDependencies:
-      '@types/bun': 1.3.14
+      '@types/bun': 1.4.3
       typescript: 5.9.3
 
   emoji-regex@10.6.0: {}
@@ -7505,6 +7519,8 @@ snapshots:
   fast-decode-uri-component@1.0.1: {}
 
   fast-deep-equal@3.1.3: {}
+
+  fast-equals@6.2.1: {}
 
   fast-glob@3.3.1:
     dependencies:
