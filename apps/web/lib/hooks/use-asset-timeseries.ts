@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { AssetTimeseries } from "@/lib/assets/types";
+import { timeseriesPath, type AssetTimeseries } from "@/lib/assets/types";
 
 interface State {
   data: AssetTimeseries | null;
@@ -15,13 +15,14 @@ export function useAssetTimeseries(assetId: string | null, refreshMs = 60_000) {
 
   useEffect(() => {
     if (!assetId) return;
+    const id = assetId;
     const controller = new AbortController();
 
     async function load(initial: boolean) {
       if (initial) setState({ data: null, loading: true, error: false });
       try {
-        // Sempre pela rota do Next (/api/assets/...): ela normaliza a resposta crua da API IoT.
-        const res = await fetch(`/api/assets/${assetId}/timeseries`, {
+        // Sempre pela rota do Next (app/maps/data/...): ela normaliza a resposta crua da API IoT.
+        const res = await fetch(timeseriesPath(id), {
           signal: controller.signal,
         });
         if (!res.ok) throw new Error(String(res.status));

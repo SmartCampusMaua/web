@@ -1,4 +1,4 @@
-// Cliente da API IoT (só roda no servidor: usado pela rota /api/assets/[assetId]/timeseries).
+// Cliente da API IoT (só roda no servidor: usado pela rota /maps/data/[assetId]).
 import { METRICS } from "@/lib/asset-metrics";
 import { QUERY, type Asset, type AssetTimeseries, type SensorSeries } from "@/lib/assets/types";
 
